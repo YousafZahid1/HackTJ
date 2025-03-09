@@ -1,4 +1,3 @@
-
 import speech_recognition as sr
 import commands as co
 
@@ -32,7 +31,7 @@ def detect_voice():
                     site = text.split('open ')[-1].strip()
                     if site:
                         print(f"Opening {site}...")
-                        co.open_website(site)  # Use the website opener function
+                        return f"open_website({site})"
                     else:
                         print("Sorry, I couldn't understand the website name.")
                 elif 'capture region' in text:

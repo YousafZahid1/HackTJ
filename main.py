@@ -32,7 +32,7 @@ def loop():
     init_prompt = """For the next responses, interpret the user input and give me a set of plain text commands 
                      that will implement the user request. The commands should be in the format (no quotations):
                      [command1(param1, ...), command2(param1, ...), ...]. Give me the commands only from this list:
-                     move_mouse(x, y), click(), double_click(), scroll_mouse(amount), open_website(domain), write(text), wait(seconds)
+                     move_mouse(x, y), click(), double_click(), scroll_mouse(amount), open_website(domain + TLD), write(text), wait(seconds)
                      Make sure to note that sites take 3s to load. Here is the input:"""
     #print(generate_ai_response(init_prompt))
     
