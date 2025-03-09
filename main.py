@@ -1,7 +1,6 @@
 import google.generativeai as genai
 import commands as com
 import detect_voice as dv
-import ast
 import re
 
 def generate_ai_response(text, region=None):
@@ -23,6 +22,8 @@ def parse_ai_response(response):
     match = pattern.search(response)
     if match:
         commands_str = match.group(1)
+        # Remove any extraneous newline characters
+        commands_str = commands_str.replace('\n', '')
         commands_list = [cmd.strip() for cmd in commands_str.split('),') if cmd]
         commands_list = [cmd.strip('`') + ')' if not cmd.endswith(')') else cmd.strip('`') for cmd in commands_list]
         return commands_list
@@ -32,7 +33,7 @@ def loop():
     init_prompt = """For the next responses, interpret the user input and give me a set of plain text commands 
                      that will implement the user request. The commands should be in the format (no quotations):
                      [command1(param1, ...), command2(param1, ...), ...]. Give me the commands only from this list:
-                     move_mouse(x, y), click(), double_click(), scroll_mouse(amount), open_website(domain + TLD), write(text), wait(seconds)
+                     move_mouse(x, y), click(), double_click(), scroll_continuous(amount, duration=20), stop_scrolling, open_website(domain), type(text), wait(seconds)
                      Make sure to note that sites take 3s to load. Here is the input:"""
     #print(generate_ai_response(init_prompt))
     

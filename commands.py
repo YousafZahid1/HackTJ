@@ -5,6 +5,10 @@ import threading
 import commands as com
 import re
 
+# Define global variables for scrolling
+scrolling = False
+scroll_thread = None
+
 # Open the website
 def open_website(domain):
     domain = domain.lower().replace(" ", "")
@@ -13,7 +17,7 @@ def open_website(domain):
     return True
 
 # Scroll the page continuously
-def scroll_mouse(amount, duration=20):
+def scroll_continuous(amount, duration=20):
     def continuous_scroll():
         start_time = time.time()
         while scrolling and (time.time() - start_time < duration):
@@ -21,7 +25,11 @@ def scroll_mouse(amount, duration=20):
             time.sleep(1)  # Make the scrolling even slower
         stop_scrolling()
 
-    global scrolling
+    global scrolling, scroll_thread
+    if scrolling and scroll_thread and scroll_thread.is_alive():
+        stop_scrolling()
+        scroll_thread.join()
+
     scrolling = True
     scroll_thread = threading.Thread(target=continuous_scroll)
     scroll_thread.start()
@@ -45,7 +53,7 @@ def double_click():
     pyautogui.doubleClick()
     return True
 
-def write(text):
+def type(text):
     pyautogui.write(text)
     return True
 
@@ -65,11 +73,11 @@ def execute_command(command):
     elif command_name == "double_click":
         double_click()
     elif command_name == "scroll_mouse":
-        scroll_mouse(int(params[0]))
+        scroll_continuous(int(params[0]))
     elif command_name == "open_website":
         open_website(params[0])
-    elif command_name == "write":
-        write(params[0])
+    elif command_name == "type":
+        type(params[0])
     elif command_name == "wait":
         wait(int(params[0]))
     else:
