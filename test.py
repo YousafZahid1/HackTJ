@@ -1,18 +1,11 @@
-
 import cv2
 import mediapipe as mp
 import pyautogui
 import numpy as np
 from collections import deque
+import queue
 
-def eye_tracking(sensitivity=2.0, smoothing_factor=5):
-  import cv2
-import mediapipe as mp
-import pyautogui
-import numpy as np
-from collections import deque
-
-def eye_tracking(sensitivity=2.0, smoothing_factor=5):
+def eye_tracking(sensitivity=2.0, smoothing_factor=10):  # Increased smoothing factor
     cam = cv2.VideoCapture(0)
     face_mesh = mp.solutions.face_mesh.FaceMesh(
         refine_landmarks=True,
@@ -26,9 +19,9 @@ def eye_tracking(sensitivity=2.0, smoothing_factor=5):
     position_buffer = deque(maxlen=smoothing_factor)
     
     # Scroll parameters
-    SCROLL_THRESHOLD_UP = -0.05
-    SCROLL_THRESHOLD_DOWN = 0.05
-    SCROLL_AMOUNT = 50
+    SCROLL_THRESHOLD_UP = -0.09  # Adjusted threshold for scrolling up
+    SCROLL_THRESHOLD_DOWN = -0.13  # Adjusted threshold for scrolling down
+    SCROLL_AMOUNT = 1  # Further reduced scroll amount for slower scrolling
     
     # Dead zone to prevent jitter
     DEAD_ZONE = 0.02
@@ -105,22 +98,21 @@ def eye_tracking(sensitivity=2.0, smoothing_factor=5):
                         right_eye[0].y + right_eye[1].y) / 4
             eye_relative_pos = avg_eye_y - nose_y
             
-            if eye_relative_pos < SCROLL_THRESHOLD_UP:
+            # Debug prints
+            print(f"eye_relative_pos: {eye_relative_pos}")
+            print(f"SCROLL_THRESHOLD_UP: {SCROLL_THRESHOLD_UP}")
+            print(f"SCROLL_THRESHOLD_DOWN: {SCROLL_THRESHOLD_DOWN}")
+            
+            if eye_relative_pos > SCROLL_THRESHOLD_UP:
+                print("Scrolling up")
                 pyautogui.scroll(SCROLL_AMOUNT)
-            elif eye_relative_pos > SCROLL_THRESHOLD_DOWN:
+            elif eye_relative_pos < SCROLL_THRESHOLD_DOWN:
+                print("Scrolling down")
                 pyautogui.scroll(-SCROLL_AMOUNT)
                 
         frame_queue.put(frame)
     cam.release()
 
 # Make sure to define frame_queue somewhere in your main code
-# Example usage:
-# import queue
-# frame_queue = queue.Queue()
-# eye_tracking()
-
-# Make sure to define frame_queue somewhere in your main code
-# Example usage:
-# import queue
-# frame_queue = queue.Queue()
-# eye_tracking()
+frame_queue = queue.Queue()
+eye_tracking()
