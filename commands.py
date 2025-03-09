@@ -21,8 +21,8 @@ def scroll_continuous(amount, duration=20):
     def continuous_scroll():
         start_time = time.time()
         while scrolling and (time.time() - start_time < duration):
-            pyautogui.scroll(-amount)  # Reverse the scrolling direction
-            time.sleep(1)  # Make the scrolling even slower
+            pyautogui.scroll(-amount // 100)  # Scroll in even smaller increments
+            time.sleep(0.5)  # Increase the sleep duration to make scrolling smoother
         stop_scrolling()
 
     global scrolling, scroll_thread
@@ -72,7 +72,7 @@ def execute_command(command):
         click()
     elif command_name == "double_click":
         double_click()
-    elif command_name == "scroll_mouse":
+    elif command_name == "scroll_continuous":
         scroll_continuous(int(params[0]))
     elif command_name == "open_website":
         open_website(params[0])

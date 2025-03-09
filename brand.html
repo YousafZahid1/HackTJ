@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Python File</title>
+</head>
+<body>
+    <button id="download-button">Download main_website.py</button>
+
+    <!-- Hidden anchor link to trigger download -->
+    <a  href="Natours/main_website.py" download="Natours/main_website.py" style="display:none"></a>
+
+    <script>
+        document.getElementById('download-button').addEventListener('click', function() {
+            document.getElementById('download-link').click();
+        });
+    </script>
+</body>
+</html>

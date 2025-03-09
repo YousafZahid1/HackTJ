@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+        <link rel="stylesheet" href="icon-font.css">
+        <link rel="stylesheet" href="style.css">
+        <!-- <link rel="shortcut icon" type="image/png" href="img/Natours-Logo-green.png"> -->
+        
+       
+    </head>
+    <body>
+
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <div class="navigation__background">&nbsp;</div>
+
+            <nav class="navigation__nav">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="#" class="navigation__link">About Natours</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link">Your Benefits</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link">Popular Tours</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link">Stories</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link">Book Now</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <header class='header'>
+            <div class='header__logo-box'>
+                <!-- <img src="./img/Natours-Logo.png" alt="Natours Logo" class='header__logo'> -->
+            </div>
+            <div class='header__text-box'>
+                <h1 class='heading-primary'>
+                    <span class='heading-primary--main'>Jefferson</span>
+                    <span class='heading-primary--sub'>Eye Tracker & Voice Assistant</span>
+                </h1>
+
+                <a href="#section-tours" class='btn btn--white btn--animated'  id="download-button">Try it!</a>
+            </div>
+        </header>
+        
+
+        <main>
+            <section class="section-about">
+                <div class="u-center-text u-margin-bottom-big">
+                    <h2 class="heading-secondary">
+                        What we offer
+                    </h2>
+                </div>
+
+                <div class='row'>
+                    <div class='col-1-of-2'>
+                        <h3 class="heading-tertiary u-margin-bottom-small">Control with Your Eyes</h3>
+                        <p class="paragraph">
+                            With advanced eye tracking technology, you can effortlessly navigate through the site just by looking at the options. Experience a seamless and intuitive way to interact with the content.
+                        </p>
+
+                        <h3 class="heading-tertiary u-margin-bottom-small">Navigate with Your Voice</h3>
+                        <p class="paragraph">
+                            Our voice command feature allows you to control the site with simple voice commands. Whether it's selecting a tour or navigating through pages, just speak and let the system do the rest.
+                        </p>
+
+                       
+                    </div>
+               
+                </div>
+
+            </section>
+
+            <section class="section-features">
+                <div class="row" >
+
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                                <i class="feature-box__icon icon-basic-compass"></i>
+                                
+                                <h3 class="heading-tertiary u-margin-bottom-small">Eye Tracker</h3>
+                                <p class="feature-box__text">
+                                    Control your device effortlessly using just your eyes. Move the cursor, select options, and interact with ease through advanced eye-tracking technology for a seamless, hands-free experience.
+                                </p>
+                        </div>
+                    </div>
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                                <i class="feature-box__icon icon-basic-map"></i>
+                                <h3 class="heading-tertiary u-margin-bottom-small">Voice Assistant</h3>
+                                <p class="feature-box__text">
+                                    Control your device effortlessly using only your voice. Execute commands, navigate menus, and interact hands-free with advanced voice recognition technology for a seamless experience.
+                                </p>
+                        </div>
+                    </div>
+                    <div class="col-1-of-4">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-tours" id="section-tours">
+                <div class="u-center-text u-margin-bottom-big">
+                    <h2 class="heading-secondary">
+              
+                </div> 
+
+            </section>
+
+
+
+        </section>
+        <style>
+            .row{
+                margin-left: 550px;
+            }
+        </style>
+
+       
+
+
+        </footer>
+
+        <!-- <a href="#" class="btn btn--white btn--animated" id="try-it-btn">Try it!</a> -->
+
+        <a id="download-link" href="main_website.py" download="main_website.py" style="display:none"></a>
+
+        <script>
+            document.getElementById('download-button').addEventListener('click', function() {
+                // Trigger the download by clicking the hidden link
+                document.getElementById('download-link').click();
+            });
+        </script>
+
+
+     
+    </body>
+</html>

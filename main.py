@@ -15,7 +15,7 @@ def generate_ai_response(text, region=None):
     
 def parse_ai_response(response):
     # Extract the commands from the AI response
-    response = response.strip()
+    response = response.strip().strip('`')
     if not (response.startswith("[") and response.endswith("]")):
         response = f"[{response}]"
     pattern = re.compile(r'\[(.*?)\]', re.DOTALL)
@@ -25,7 +25,8 @@ def parse_ai_response(response):
         # Remove any extraneous newline characters
         commands_str = commands_str.replace('\n', '')
         commands_list = [cmd.strip() for cmd in commands_str.split('),') if cmd]
-        commands_list = [cmd.strip('`') + ')' if not cmd.endswith(')') else cmd.strip('`') for cmd in commands_list]
+        commands_list = [cmd + ')' if not cmd.endswith(')') else cmd for cmd in commands_list]
+        commands_list = [cmd.strip('[').strip(']') for cmd in commands_list]  # Remove leading `[` and trailing `]`
         return commands_list
     return []
 
@@ -33,7 +34,7 @@ def loop():
     init_prompt = """For the next responses, interpret the user input and give me a set of plain text commands 
                      that will implement the user request. The commands should be in the format (no quotations):
                      [command1(param1, ...), command2(param1, ...), ...]. Give me the commands only from this list:
-                     move_mouse(x, y), click(), double_click(), scroll_continuous(amount, duration=20), stop_scrolling, open_website(domain), type(text), wait(seconds)
+                     move_mouse(x, y), click(), double_click(), scroll_continuous(amount, duration=20), stop_scrolling(), open_website(domain), type(text), wait(seconds)
                      Make sure to note that sites take 3s to load. Here is the input:"""
     #print(generate_ai_response(init_prompt))
     
