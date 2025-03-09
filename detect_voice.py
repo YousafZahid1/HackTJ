@@ -21,43 +21,6 @@ def detect_voice():
                 text = recognizer.recognize_google(audio).lower()
                 print(f"Detected voice input: {text}")
 
-                # Check for commands
-                if 'hello' in text:
-                    print("Hello! How can I assist you?")
-                elif 'open' in text:
-                    # Extract the website name after 'open'
-                    if text == 'open':
-                        continue
-                    site = text.split('open ')[-1].strip()
-                    if site:
-                        print(f"Opening {site}...")
-                        return f"open_website({site})"
-                    else:
-                        print("Sorry, I couldn't understand the website name.")
-                elif 'capture region' in text:
-                    # Extract the region coordinates after 'capture region'
-                    coords = text.split('capture region ')[-1].strip()
-                    if coords:
-                        try:
-                            x, y, width, height = map(int, coords.split())
-                            print(f"Capturing region: {x}, {y}, {width}, {height}")
-                            return f"capture_region({x}, {y}, {width}, {height})"
-                        except ValueError:
-                            print("Invalid coordinates format. Please provide four integers.")
-                    else:
-                        print("Sorry, I couldn't understand the region coordinates.")
-                elif 'exit' in text:
-                    print("Goodbye!")
-                    return "exit"  # Exit the loop and stop the program
-                else:
-                    counter += 1
-                    print("Unknown command.")
-                    recognizer.adjust_for_ambient_noise(source, duration=.1)
-                    
-                    if counter > 5:
-                        print("Too many errors, quitting.")
-                        return "exit"
-
                 return text
 
             except sr.UnknownValueError:
