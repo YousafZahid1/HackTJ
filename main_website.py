@@ -183,11 +183,6 @@ def eye_tracking(sensitivity=2.0, smoothing_factor=10):
                         right_eye[0].y + right_eye[1].y) / 4
             eye_relative_pos = avg_eye_y - nose_y
             
-            # Debug prints
-            print(f"eye_relative_pos: {eye_relative_pos}")
-            print(f"SCROLL_THRESHOLD_UP: {SCROLL_THRESHOLD_UP}")
-            print(f"SCROLL_THRESHOLD_DOWN: {SCROLL_THRESHOLD_DOWN}")
-            
             if eye_relative_pos > SCROLL_THRESHOLD_UP:
                 print("Scrolling up")
                 pyautogui.scroll(SCROLL_AMOUNT)

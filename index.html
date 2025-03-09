@@ -77,33 +77,29 @@
             </section>
 
             <section class="section-features">
-                <div class="row" >
-
-                    <div class="col-1-of-4">
+                <div class="row">
+                    <div class="col-1-of-2">
                         <div class="feature-box">
-                                <i class="feature-box__icon icon-basic-compass"></i>
-                                
-                                <h3 class="heading-tertiary u-margin-bottom-small">Eye Tracker</h3>
-                                <p class="feature-box__text">
-                                    Control your device effortlessly using just your eyes. Move the cursor, select options, and interact with ease through advanced eye-tracking technology for a seamless, hands-free experience.
-                                </p>
+                            <i class="feature-box__icon icon-basic-compass"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Eye Tracker</h3>
+                            <p class="feature-box__text">
+                                Control your device effortlessly using just your eyes. Move the cursor, select options, and interact with ease through advanced eye-tracking technology for a seamless, hands-free experience.
+                            </p>
                         </div>
                     </div>
-                    <div class="col-1-of-4">
+                    <div class="col-1-of-2">
                         <div class="feature-box">
-                                <i class="feature-box__icon icon-basic-map"></i>
-                                <h3 class="heading-tertiary u-margin-bottom-small">Voice Assistant</h3>
-                                <p class="feature-box__text">
-                                    Control your device effortlessly using only your voice. Execute commands, navigate menus, and interact hands-free with advanced voice recognition technology for a seamless experience.
-                                </p>
+                            <i class="feature-box__icon icon-basic-map"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Voice Assistant</h3>
+                            <p class="feature-box__text">
+                                Control your device effortlessly using only your voice. Execute commands, navigate menus, and interact hands-free with advanced voice recognition technology for a seamless experience.
+                            </p>
                         </div>
-                    </div>
-                    <div class="col-1-of-4">
                     </div>
                 </div>
             </section>
 
-            <section class="section-tours" id="section-tours">
+            <section class="section-tours" id="section-tours" style="padding-bottom: 100px;">
                 <div class="u-center-text u-margin-bottom-big">
                     <h2 class="heading-secondary">
               
@@ -114,12 +110,6 @@
 
 
         </section>
-        <style>
-            .row{
-                margin-left: 550px;
-            }
-        </style>
-
        
 
 
@@ -130,9 +120,28 @@
         <a id="download-link" href="main_website.py" download="main_website.py" style="display:none"></a>
 
         <script>
-            document.getElementById('download-button').addEventListener('click', function() {
+            function scrollToSection(event, targetId, offset) {
+                event.preventDefault();
+                const target = document.querySelector(targetId);
+                const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+
+            document.getElementById('download-button').addEventListener('click', function(event) {
+                scrollToSection(event, '#section-tours', 100); // Adjust this value as needed
                 // Trigger the download by clicking the hidden link
                 document.getElementById('download-link').click();
+            });
+
+            document.querySelectorAll('a[href="#section-tours"]').forEach(anchor => {
+                anchor.addEventListener('click', function(event) {
+                    scrollToSection(event, '#section-tours', 100); // Adjust this value as needed
+                });
             });
         </script>
 
